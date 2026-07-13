@@ -1390,6 +1390,38 @@ body {
   }
   .environmental-insights { grid-template-columns: 1fr; }
   .odds-tables-wrapper { grid-template-columns: 1fr; }
+  .odds-table-container { overflow-x: auto; }
   .cup-advancement-split { flex-direction: column; gap: 12px; }
   .cup-qualify-side { width: 100%; }
+}
+
+@media (max-width: 480px) {
+  .app-container {
+    padding: 12px;
+  }
+  .card {
+    padding: 16px;
+  }
+  .active-match-title {
+    font-size: 20px;
+  }
+  .multi-tier-predictions-grid {
+    grid-template-columns: 1fr;
+  }
+  .risk-indicator-row {
+    grid-template-columns: 1fr;
+  }
+  .prev-predictions-grid {
+    grid-template-columns: 1fr;
+  }
+  .divergence-badge-row {
+    flex-direction: column;
+    align-items: flex-start !important;
+    gap: 8px;
+  }
+  .log-header-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
 }
