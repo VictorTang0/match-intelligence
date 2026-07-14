@@ -265,6 +265,23 @@ const REAL_MATCH_RESULTS = {
  * 抓取竞彩官网赛果 (带代理重试机制)
  */
 async function fetchSportteryResults() {
+  const isProduction = window.location.hostname.includes("workers.dev") || 
+                       window.location.hostname.includes("pages.dev");
+  
+  if (isProduction) {
+    try {
+      const response = await fetch("/api/getMatchResultV1");
+      if (response.ok) {
+        const data = await response.json();
+        if (data && data.value && data.value.matchList) {
+          return data.value.matchList;
+        }
+      }
+    } catch (e) {
+      console.warn("Production direct API fetch failed, falling back to proxies...", e);
+    }
+  }
+
   const proxies = [
     url => `https://corsproxy.io/?${encodeURIComponent(url)}`,
     url => `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`,
@@ -580,53 +597,85 @@ function cleanupHistoricalMatches() {
  * 抓取今日竞彩计算器推荐对阵并动态更新赛程列表
  */
 async function fetchTodayRecommendedMatches() {
-  const proxies = [
-    url => `https://corsproxy.io/?${encodeURIComponent(url)}`,
-    url => `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`,
-    url => `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(url)}`
-  ];
-  
-  const targetUrl = "https://webapi.sporttery.cn/gateway/uniform/football/getMatchCalculatorV1.qry?channel=c";
-  
+  const isProduction = window.location.hostname.includes("workers.dev") || 
+                       window.location.hostname.includes("pages.dev");
+                       
   let remoteMatches = null;
-  for (let getProxyUrl of proxies) {
+  
+  if (isProduction) {
     try {
-      const response = await fetch(getProxyUrl(targetUrl));
-      if (!response.ok) continue;
-      const text = await response.text();
-      let data = null;
-      try {
-        const parsed = JSON.parse(text);
-        if (parsed && typeof parsed === "object") {
-          if ("contents" in parsed) {
-            data = JSON.parse(parsed.contents);
-          } else {
-            data = parsed;
+      const response = await fetch("/api/getMatchCalculatorV1");
+      if (response.ok) {
+        const data = await response.json();
+        let extractedMatches = [];
+        if (data && data.value) {
+          if (data.value.matchList && data.value.matchList.length > 0) {
+            extractedMatches = data.value.matchList;
+          } else if (data.value.matchInfoList) {
+            data.value.matchInfoList.forEach(info => {
+              if (info.subMatchList) {
+                extractedMatches = extractedMatches.concat(info.subMatchList);
+              }
+            });
           }
         }
-      } catch (e) {
-        console.warn("Failed to parse response text:", e);
-      }
-      
-      let extractedMatches = [];
-      if (data && data.value) {
-        if (data.value.matchList && data.value.matchList.length > 0) {
-          extractedMatches = data.value.matchList;
-        } else if (data.value.matchInfoList) {
-          data.value.matchInfoList.forEach(info => {
-            if (info.subMatchList) {
-              extractedMatches = extractedMatches.concat(info.subMatchList);
-            }
-          });
+        if (extractedMatches.length > 0) {
+          remoteMatches = extractedMatches;
         }
       }
-      
-      if (extractedMatches.length > 0) {
-        remoteMatches = extractedMatches;
-        break;
-      }
     } catch (e) {
-      console.warn("Calculator fetch proxy failed:", e);
+      console.warn("Production direct API fetch failed, falling back to proxies...", e);
+    }
+  }
+  
+  if (!remoteMatches) {
+    const proxies = [
+      url => `https://corsproxy.io/?${encodeURIComponent(url)}`,
+      url => `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`,
+      url => `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(url)}`
+    ];
+    
+    const targetUrl = "https://webapi.sporttery.cn/gateway/uniform/football/getMatchCalculatorV1.qry?channel=c";
+    
+    for (let getProxyUrl of proxies) {
+      try {
+        const response = await fetch(getProxyUrl(targetUrl));
+        if (!response.ok) continue;
+        const text = await response.text();
+        let data = null;
+        try {
+          const parsed = JSON.parse(text);
+          if (parsed && typeof parsed === "object") {
+            if ("contents" in parsed) {
+              data = JSON.parse(parsed.contents);
+            } else {
+              data = parsed;
+            }
+          }
+        } catch (e) {
+          console.warn("Failed to parse response text:", e);
+        }
+        
+        let extractedMatches = [];
+        if (data && data.value) {
+          if (data.value.matchList && data.value.matchList.length > 0) {
+            extractedMatches = data.value.matchList;
+          } else if (data.value.matchInfoList) {
+            data.value.matchInfoList.forEach(info => {
+              if (info.subMatchList) {
+                extractedMatches = extractedMatches.concat(info.subMatchList);
+              }
+            });
+          }
+        }
+        
+        if (extractedMatches.length > 0) {
+          remoteMatches = extractedMatches;
+          break;
+        }
+      } catch (e) {
+        console.warn("Calculator fetch proxy failed:", e);
+      }
     }
   }
   
@@ -678,6 +727,9 @@ async function fetchTodayRecommendedMatches() {
       if (existingMatch) {
         existingMatch.odds.bet365.current1X2 = current1X2;
         existingMatch.odds.bet365.currentAsian = currentAsian;
+        existingMatch.time = `北京时间 ${dateStr} ${timeStr.substring(0, 5)}`;
+        existingMatch.date = dateStr;
+        MATCH_START_TIMES[existingMatch.id] = kickoffCst;
         newMatches.push(existingMatch);
       } else {
         const newMatch = {
@@ -724,6 +776,13 @@ async function fetchTodayRecommendedMatches() {
     autoResultLogs.push({
       time: getCSTTimeString().substring(0, 5),
       text: `[数据源更新] 成功通过竞彩网拉取今日最新的 ${newMatches.length} 场对阵赛程数据！`
+    });
+    renderAutoResultLogs();
+  } else {
+    console.warn("Could not fetch recommended matches. If running locally via file://, CORS will block this. If deployed, make sure the Cloudflare Worker proxy is deployed.");
+    autoResultLogs.push({
+      time: getCSTTimeString().substring(0, 5),
+      text: `[警告] 无法拉取今日最新对阵（本地浏览受浏览器跨域限制，请部署至云端以自动启动服务代理）。`
     });
     renderAutoResultLogs();
   }
