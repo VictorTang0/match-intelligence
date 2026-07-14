@@ -1371,6 +1371,34 @@ body {
   gap: 24px;
 }
 
+/* 事件信息来源标签 */
+.event-source-tag {
+  font-size: 9px;
+  color: var(--accent-gold);
+  font-weight: 600;
+  margin-top: 2px;
+  display: block;
+  opacity: 0.8;
+}
+
+.event-source-tag.verified {
+  color: var(--primary-emerald);
+}
+
+.event-source-tag.unverified {
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* 对阵按钮中的开赛时间 */
+.match-select-kickoff {
+  font-family: var(--font-header);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--primary-cyan);
+  margin-top: 2px;
+}
+
 @media (max-width: 1100px) {
   .workspace-layout { grid-template-columns: 1fr; }
   .grid-2-columns { grid-template-columns: 1fr; }
@@ -1397,13 +1425,47 @@ body {
 
 @media (max-width: 480px) {
   .app-container {
-    padding: 12px;
+    padding: 10px;
+  }
+  .app-header {
+    padding: 12px 16px;
+  }
+  .header-status-panel {
+    gap: 6px;
+  }
+  .status-item {
+    padding: 4px 10px;
+  }
+  .status-label {
+    font-size: 9px;
+  }
+  .status-value {
+    font-size: 12px;
   }
   .card {
-    padding: 16px;
+    padding: 14px;
+    border-radius: 12px;
   }
   .active-match-title {
-    font-size: 20px;
+    font-size: 18px;
+  }
+  .card-title {
+    font-size: 14px;
+  }
+  .section-tag {
+    font-size: 8.5px;
+  }
+  .conclusion-content {
+    font-size: 12.5px;
+  }
+  .conclusion-header h3 {
+    font-size: 15px;
+  }
+  .sidebar-section {
+    padding: 14px;
+  }
+  .sidebar-title {
+    font-size: 14px;
   }
   .multi-tier-predictions-grid {
     grid-template-columns: 1fr;
@@ -1412,6 +1474,9 @@ body {
     grid-template-columns: 1fr;
   }
   .prev-predictions-grid {
+    grid-template-columns: 1fr;
+  }
+  .weights-grid {
     grid-template-columns: 1fr;
   }
   .divergence-badge-row {
@@ -1424,4 +1489,41 @@ body {
     align-items: flex-start;
     gap: 4px;
   }
+  .venue-info {
+    flex-direction: column;
+    gap: 6px;
+  }
+  .match-select-btn {
+    padding: 10px 12px;
+  }
+  .data-table th, .data-table td {
+    padding: 5px 4px;
+    font-size: 10px;
+  }
+  .comparison-matrix-table th, .comparison-matrix-table td {
+    padding: 8px 6px;
+    font-size: 11px;
+  }
+  .tier-item {
+    padding: 8px 10px;
+  }
+  .tier-value {
+    font-size: 12px;
+  }
+  .conclusion-panel {
+    border-width: 2px;
+  }
+  .conclusion-panel::before {
+    width: 3px;
+  }
+}
+
+/* 临场监测信息源标注样式 */
+.event-source {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 4px;
+  border-top: 1px dashed rgba(255, 255, 255, 0.05);
+  padding-top: 4px;
+  line-height: 1.4;
 }

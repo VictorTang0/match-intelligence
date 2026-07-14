@@ -65,20 +65,20 @@
         <!-- 逐小时预测数据模拟更新器 (Hourly update simulation) -->
         <div class="sidebar-section hourly-simulator-section">
           <div class="section-header-row">
-            <h2 class="sidebar-title">美东整点数据同步</h2>
-            <span class="badge" style="background: var(--grad-main);">整点对齐</span>
+            <h2 class="sidebar-title">北京时间整点数据同步</h2>
+            <span class="badge" style="background: var(--grad-main);">北京时间整点</span>
           </div>
-          <p class="simulator-desc">数据源对齐美国东部时间整点进行自动同步。页面显示美东时间及距离下次同步的倒计时（分与秒）。</p>
+          <p class="simulator-desc">数据源对齐北京时间（UTC+8）整点进行自动同步。页面显示北京时间及距离下次同步的倒计时（分与秒）。</p>
           
           <div class="hourly-status-box" style="position:relative;">
             <div class="countdown-row">
               <span class="pulse-indicator" style="background-color: var(--primary-cyan); box-shadow: 0 0 8px var(--primary-cyan);"></span>
-              <span class="status-label" style="font-weight: 600; color:var(--text-main);">美东时间同步监视器</span>
+              <span class="status-label" style="font-weight: 600; color:var(--text-main);">北京时间同步监视器</span>
             </div>
             
             <!-- 显示美东时间 -->
             <div style="font-size: 11px; color: var(--text-muted); margin-top: 6px;">
-              当前美东时间 (EDT): <span id="us-time-display" class="font-outfit" style="color:var(--accent-gold); font-weight:600;">--:--:--</span>
+              当前北京时间 (UTC+8): <span id="us-time-display" class="font-outfit" style="color:var(--accent-gold); font-weight:600;">--:--:--</span>
             </div>
             
             <!-- 倒计时 (分和秒) -->
@@ -89,7 +89,7 @@
 
           <!-- 模拟事件概率校验表 -->
           <div class="events-monitor-box">
-            <span class="insight-label">预设临场事件真伪校准</span>
+            <span class="insight-label">临场事件实时校验（基于真实信息源）</span>
             <div class="events-monitor-list" id="events-monitor-list">
               <!-- 动态填充可能事件及是否发生的判定 -->
             </div>
@@ -106,7 +106,7 @@
             <h2 class="sidebar-title">参数自适应演进</h2>
             <span class="badge" style="background: var(--grad-emerald);">全自动</span>
           </div>
-          <p class="simulator-desc">手控修正已禁用。当比赛完赛2分钟后，模型将自动抓取真实比分进行反向传播自校准并完成代数迭代。</p>
+          <p class="simulator-desc">手控修正已禁用。在每日 10:00-23:00 内，比赛完赛5分钟后模型将自动从竞彩网获取真实比分，进行反向传播自校准并完成代数迭代。</p>
           
           <!-- 核心权重分配 -->
           <div class="weights-grid" id="weights-display">
@@ -134,63 +134,23 @@
       <!-- 右侧智能分析主面板 -->
       <main class="dashboard-content">
         
-        <!-- 核心结论置顶 (Prominently displayed at the top) -->
-        <section class="dashboard-row top-conclusion-row">
-          <div class="conclusion-panel card" id="conclusion-panel-card">
-            <div class="conclusion-header">
-              <div class="conclusion-title-group">
-                <span class="section-tag">AI 综合研判结论 (置顶)</span>
-                <h3>决策引擎多维度加权终极结论</h3>
-              </div>
-              <div class="conclusion-meta">
-                <span class="data-source-badge">真实数据交叉校验</span>
-              </div>
-            </div>
-            <div class="conclusion-content" id="final-weighted-conclusion">
-              正在加载 AI 模型推理结论，请稍候...
-            </div>
-          </div>
-        </section>
-
-        <!-- 比赛背景与天气/伤病 -->
+        <!-- 比赛背景与基本信息 (置顶) -->
         <section class="dashboard-row match-profile-row">
-          <div class="match-info-card card">
-            <span class="section-tag" id="match-league-label">赛事组别</span>
-            <h2 class="active-match-title" id="active-match-title">加载对阵信息...</h2>
+          <div class="match-info-card card" style="background: var(--grad-dark); padding: 16px 20px;">
+            <span class="section-tag" id="match-league-label" style="margin-bottom: 2px;">赛事组别</span>
+            <h2 class="active-match-title" id="active-match-title" style="margin-bottom: 4px; font-size: 22px;">加载对阵信息...</h2>
             
-            <div class="venue-info">
+            <div class="venue-info" style="margin-bottom: 0; padding: 4px 12px; background: rgba(0, 0, 0, 0.2); border-radius: 4px; display: inline-flex; gap: 16px;">
               <span class="venue-item" id="match-time">🕒 --</span>
               <span class="venue-item" id="match-venue">📍 --</span>
             </div>
-
-            <!-- 天气与关键伤病情报 -->
-            <div class="environmental-insights">
-              <div class="weather-box">
-                <span class="insight-label">天气与场馆效应</span>
-                <p id="match-weather">加载中...</p>
-              </div>
-              <div class="suspensions-box">
-                <span class="insight-label">突发伤病与临场情报</span>
-                <ul id="match-news-list" class="bullet-list">
-                  <!-- 临场情报 -->
-                </ul>
-              </div>
-            </div>
           </div>
         </section>
 
-        <!-- 常规时间概率预测与加时点球晋级图谱 -->
+        <!-- 第一栏：预测结果置顶 与 AI综合结论 并排 -->
         <section class="dashboard-row grid-2-columns">
           
-          <!-- 指标PK柱状图 -->
-          <div class="indicators-card card">
-            <h3 class="card-title">常规时间 7 项核心评估指标 PK</h3>
-            <div class="indicators-chart-container" id="indicators-chart">
-              <!-- 指标图 -->
-            </div>
-          </div>
-
-          <!-- 常规时间预测 + 晋级概率 -->
+          <!-- 常规时间预测 + 晋级概率 (置顶的预测结果) -->
           <div class="predictions-card card" id="current-predictions-card">
             <span class="section-tag" style="color: var(--primary-cyan);">最新预测结果</span>
             <h3 class="card-title" style="margin-bottom:12px;">全方位多维预测结果</h3>
@@ -283,6 +243,57 @@
 
             </div>
           </div>
+
+          <!-- AI 综合研判结论 -->
+          <div class="conclusion-panel card" id="conclusion-panel-card" style="height: 100%;">
+            <div class="conclusion-header">
+              <div class="conclusion-title-group">
+                <span class="section-tag" style="color: var(--primary-cyan);">AI 综合研判结论 (置顶)</span>
+                <h3>决策引擎多维度加权终极结论</h3>
+              </div>
+              <div class="conclusion-meta">
+                <span class="data-source-badge">真实数据交叉校验</span>
+              </div>
+            </div>
+            <div class="conclusion-content" id="final-weighted-conclusion">
+              正在加载 AI 模型推理结论，请稍候...
+            </div>
+          </div>
+
+        </section>
+
+        <!-- 第二栏：指标PK 与 气候/情报 关联并排 -->
+        <section class="dashboard-row grid-2-columns">
+          
+          <!-- 指标PK柱状图 -->
+          <div class="indicators-card card">
+            <span class="section-tag">核心维度对比</span>
+            <h3 class="card-title">常规时间 7 项核心评估指标 PK</h3>
+            <div class="indicators-chart-container" id="indicators-chart">
+              <!-- 指标图 -->
+            </div>
+          </div>
+
+          <!-- 气候情报卡片 -->
+          <div class="match-info-card card">
+            <span class="section-tag">临场多维情报</span>
+            <h3 class="card-title">天气与关键伤病情报</h3>
+            
+            <!-- 天气与关键伤病情报 -->
+            <div class="environmental-insights" style="border-top: none; padding-top: 0; margin-top: 0;">
+              <div class="weather-box" style="margin-bottom: 12px;">
+                <span class="insight-label">天气与场馆效应</span>
+                <p id="match-weather">加载中...</p>
+              </div>
+              <div class="suspensions-box">
+                <span class="insight-label">突发伤病与临场情报</span>
+                <ul id="match-news-list" class="bullet-list">
+                  <!-- 临场情报 -->
+                </ul>
+              </div>
+            </div>
+          </div>
+
         </section>
 
         <!-- 上一次模型预测基准 -->

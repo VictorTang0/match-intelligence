@@ -8,7 +8,7 @@ const MATCHES_DATA = [
     id: "djurgardens-halmstads",
     league: "瑞典超级联赛 (瑞超)",
     date: "2026-07-13",
-    time: "北京时间 2026-07-14 01:00 (17:00 UTC)",
+    time: "北京时间 2026-07-14 00:00",
     venue: "斯德哥尔摩 斯威德贝克竞技场 (Tele2 Arena) - 人工草坪，可收缩屋顶",
     weather: "温度 18°C，多云，屋顶已关闭（无风无雨，有利于快速传递）",
     isCupMatch: false,
@@ -86,7 +86,7 @@ const MATCHES_DATA = [
     id: "france-spain",
     league: "美加墨世界杯 半决赛",
     date: "2026-07-14",
-    time: "北京时间 2026-07-15 03:00 (19:00 UTC)",
+    time: "北京时间 2026-07-15 03:00",
     venue: "美国德克萨斯州 阿灵顿体育场 (AT&T Stadium) - 穹顶室内场",
     weather: "恒温空调环境：22°C，无风力湿度影响，草皮干燥速度快",
     isCupMatch: true,
@@ -164,7 +164,7 @@ const MATCHES_DATA = [
     id: "england-argentina",
     league: "美加墨世界杯 半决赛",
     date: "2026-07-15",
-    time: "北京时间 2026-07-16 03:00 (19:00 UTC)",
+    time: "北京时间 2026-07-16 03:00",
     venue: "美国佐治亚州 亚特兰大体育场 (Mercedes-Benz Stadium) - 穹顶室内场",
     weather: "气候控制室内穹顶：21°C，人工快速草皮",
     isCupMatch: true,
@@ -308,7 +308,7 @@ const HOURLY_SIMULATED_UPDATES = {
   "djurgardens-halmstads": [
     {
       hour: 1,
-      time: "17:00 (赛前 4 小时)",
+      time: "21:00 (赛前 4 小时)",
       bet365: { odds1X2: [1.35, 4.80, 8.50], asian: { line: -1.5, home: 2.05, away: 1.75 } },
       pinnacle: { odds1X2: [1.37, 4.90, 8.20], asian: { line: -1.5, home: 2.01, away: 1.80 } },
       macau: { odds1X2: [1.33, 4.70, 8.80], asian: { line: -1.5, home: 2.10, away: 1.70 } },
@@ -318,7 +318,7 @@ const HOURLY_SIMULATED_UPDATES = {
     },
     {
       hour: 2,
-      time: "18:00 (赛前 3 小时)",
+      time: "22:00 (赛前 3 小时)",
       bet365: { odds1X2: [1.33, 5.00, 9.00], asian: { line: -1.5, home: 1.98, away: 1.82 } },
       pinnacle: { odds1X2: [1.35, 5.15, 8.70], asian: { line: -1.5, home: 1.95, away: 1.87 } },
       macau: { odds1X2: [1.30, 4.90, 9.50], asian: { line: -1.5, home: 2.02, away: 1.78 } },
@@ -328,7 +328,7 @@ const HOURLY_SIMULATED_UPDATES = {
     },
     {
       hour: 3,
-      time: "19:00 (赛前 2 小时)",
+      time: "23:00 (赛前 2 小时)",
       bet365: { odds1X2: [1.36, 4.75, 8.00], asian: { line: -1.5, home: 2.08, away: 1.72 } },
       pinnacle: { odds1X2: [1.38, 4.85, 7.80], asian: { line: -1.5, home: 2.03, away: 1.78 } },
       macau: { odds1X2: [1.34, 4.60, 8.50], asian: { line: -1.25, home: 1.78, away: 2.02 } },
@@ -338,7 +338,7 @@ const HOURLY_SIMULATED_UPDATES = {
     },
     {
       hour: 4,
-      time: "20:00 (赛前 1 小时)",
+      time: "00:00 (赛前 1 小时)",
       bet365: { odds1X2: [1.38, 4.60, 7.50], asian: { line: -1.25, home: 1.82, away: 1.98 } },
       pinnacle: { odds1X2: [1.40, 4.70, 7.30], asian: { line: -1.25, home: 1.80, away: 2.02 } },
       macau: { odds1X2: [1.37, 4.50, 7.80], asian: { line: -1.25, home: 1.84, away: 1.96 } },
@@ -350,7 +350,7 @@ const HOURLY_SIMULATED_UPDATES = {
   "france-spain": [
     {
       hour: 1,
-      time: "17:00 (赛前 4 小时)",
+      time: "23:00 (赛前 4 小时)",
       bet365: { odds1X2: [2.30, 3.00, 3.25], asian: { line: -0.25, home: 2.05, away: 1.75 } },
       pinnacle: { odds1X2: [2.36, 2.95, 3.32], asian: { line: -0.25, home: 2.08, away: 1.76 } },
       macau: { odds1X2: [2.25, 3.00, 3.20], asian: { line: -0.25, home: 2.00, away: 1.80 } },
@@ -360,7 +360,7 @@ const HOURLY_SIMULATED_UPDATES = {
     },
     {
       hour: 2,
-      time: "18:00 (赛前 3 小时)",
+      time: "00:00 (赛前 3 小时)",
       bet365: { odds1X2: [2.35, 2.95, 3.20], asian: { line: -0.25, home: 2.10, away: 1.70 } },
       pinnacle: { odds1X2: [2.40, 2.90, 3.25], asian: { line: -0.25, home: 2.15, away: 1.71 } },
       macau: { odds1X2: [2.30, 2.95, 3.15], asian: { line: -0.25, home: 2.05, away: 1.75 } },
@@ -370,7 +370,7 @@ const HOURLY_SIMULATED_UPDATES = {
     },
     {
       hour: 3,
-      time: "19:00 (赛前 2 小时)",
+      time: "01:00 (赛前 2 小时)",
       bet365: { odds1X2: [2.25, 3.05, 3.35], asian: { line: -0.25, home: 1.95, away: 1.85 } },
       pinnacle: { odds1X2: [2.29, 3.00, 3.42], asian: { line: -0.25, home: 1.98, away: 1.86 } },
       macau: { odds1X2: [2.22, 3.05, 3.30], asian: { line: -0.25, home: 1.92, away: 1.88 } },
@@ -380,7 +380,7 @@ const HOURLY_SIMULATED_UPDATES = {
     },
     {
       hour: 4,
-      time: "20:00 (赛前 1 小时)",
+      time: "02:00 (赛前 1 小时)",
       bet365: { odds1X2: [2.20, 3.10, 3.40], asian: { line: -0.25, home: 1.90, away: 1.90 } },
       pinnacle: { odds1X2: [2.25, 3.05, 3.48], asian: { line: -0.25, home: 1.95, away: 1.88 } },
       macau: { odds1X2: [2.15, 3.10, 3.35], asian: { line: -0.25, home: 1.85, away: 1.95 } },
@@ -392,7 +392,7 @@ const HOURLY_SIMULATED_UPDATES = {
   "england-argentina": [
     {
       hour: 1,
-      time: "17:00 (赛前 4 小时)",
+      time: "23:00 (赛前 4 小时)",
       bet365: { odds1X2: [3.10, 2.90, 2.50], asian: { line: 0, home: 2.10, away: 1.72 } },
       pinnacle: { odds1X2: [3.14, 2.88, 2.56], asian: { line: 0, home: 2.14, away: 1.70 } },
       macau: { odds1X2: [3.05, 2.85, 2.45], asian: { line: 0, home: 2.05, away: 1.75 } },
@@ -402,7 +402,7 @@ const HOURLY_SIMULATED_UPDATES = {
     },
     {
       hour: 2,
-      time: "18:00 (赛前 3 小时)",
+      time: "00:00 (赛前 3 小时)",
       bet365: { odds1X2: [3.00, 2.90, 2.60], asian: { line: 0, home: 2.00, away: 1.80 } },
       pinnacle: { odds1X2: [3.04, 2.88, 2.67], asian: { line: 0, home: 2.02, away: 1.79 } },
       macau: { odds1X2: [2.95, 2.88, 2.55], asian: { line: 0, home: 1.95, away: 1.85 } },
@@ -412,7 +412,7 @@ const HOURLY_SIMULATED_UPDATES = {
     },
     {
       hour: 3,
-      time: "19:00 (赛前 2 小时)",
+      time: "01:00 (赛前 2 小时)",
       bet365: { odds1X2: [3.05, 2.95, 2.55], asian: { line: 0, home: 2.05, away: 1.75 } },
       pinnacle: { odds1X2: [3.10, 2.92, 2.61], asian: { line: 0, home: 2.08, away: 1.74 } },
       macau: { odds1X2: [3.00, 2.90, 2.50], asian: { line: 0, home: 2.00, away: 1.78 } },
@@ -422,7 +422,7 @@ const HOURLY_SIMULATED_UPDATES = {
     },
     {
       hour: 4,
-      time: "20:00 (赛前 1 小时)",
+      time: "02:00 (赛前 1 小时)",
       bet365: { odds1X2: [3.10, 2.90, 2.50], asian: { line: 0, home: 2.10, away: 1.72 } },
       pinnacle: { odds1X2: [3.14, 2.88, 2.56], asian: { line: 0, home: 2.14, away: 1.70 } },
       macau: { odds1X2: [3.05, 2.85, 2.45], asian: { line: 0, home: 2.05, away: 1.75 } },
