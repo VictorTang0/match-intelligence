@@ -236,6 +236,176 @@ const MATCHES_DATA = [
       confidence: "较高（支持阿根廷）",
       mentality: "散户资金一边倒支持卫冕冠军阿根廷。然而机构将盘口从阿根廷让0.25球降盘至平手盘，并大幅上调阿根廷胜赔至 2.50。这种“便宜买冠军”的让步显然是在吸引散户继续买入阿根廷，暴露出极大的诱客倾向，英格兰的定位球对抗可能被严重低估。"
     }
+  },
+  {
+    id: "hist-1",
+    league: "瑞典超级联赛 (瑞超)",
+    date: "2026-07-12",
+    time: "北京时间 2026-07-12 21:00",
+    venue: "奥尔扬斯·瓦尔体育场",
+    weather: "温度 17°C，晴朗",
+    isCupMatch: false,
+    home: { name: "哈尔姆斯 (Halmstads BK)", rank: "16", played: 10, goalsScored: 9, goalsConceded: 20, attEfficiency: 0.4, defStability: 0.35, shotConversion: 0.45, xG: 1.05, xGA: 2.1, transSpeed: 0.5, setPiece: 0.55, newsSentiment: 0.0, news: ["哈尔姆斯主场力保不败。"] },
+    away: { name: "米亚尔比 (Mjällby AIF)", rank: "8", played: 10, goalsScored: 12, goalsConceded: 12, attEfficiency: 0.6, defStability: 0.65, shotConversion: 0.6, xG: 1.3, xGA: 1.3, transSpeed: 0.6, setPiece: 0.65, newsSentiment: 0.0, news: ["米亚尔比全主力出战客场。"] },
+    odds: {
+      bet365: { initial1X2: [2.5, 3.2, 2.8], current1X2: [2.6, 3.1, 2.7], initialAsian: { line: 0, home: 1.9, away: 1.9 }, currentAsian: { line: 0, home: 1.95, away: 1.85 } },
+      pinnacle: { initial1X2: [2.5, 3.2, 2.8], current1X2: [2.6, 3.1, 2.7], initialAsian: { line: 0, home: 1.9, away: 1.9 }, currentAsian: { line: 0, home: 1.95, away: 1.85 } },
+      macau: { initial1X2: [2.5, 3.2, 2.8], current1X2: [2.6, 3.1, 2.7], initialAsian: { line: 0, home: 1.9, away: 1.9 }, currentAsian: { line: 0, home: 1.95, away: 1.85 } }
+    },
+    retailTrends: { volume: { home: 30, draw: 30, away: 40 }, confidence: "中等", mentality: "市场筹码分布均衡" }
+  },
+  {
+    id: "hist-2",
+    league: "瑞典超级联赛 (瑞超)",
+    date: "2026-07-11",
+    time: "北京时间 2026-07-11 23:00",
+    venue: "学生体育场",
+    weather: "温度 16°C，多云",
+    isCupMatch: false,
+    home: { name: "天狼星", rank: "10", played: 10, goalsScored: 11, goalsConceded: 13, attEfficiency: 0.55, defStability: 0.5, shotConversion: 0.55, xG: 1.2, xGA: 1.4, transSpeed: 0.55, setPiece: 0.6, newsSentiment: 0.0, news: [] },
+    away: { name: "佐加顿斯", rank: "6", played: 10, goalsScored: 23, goalsConceded: 15, attEfficiency: 0.78, defStability: 0.65, shotConversion: 0.72, xG: 1.99, xGA: 1.48, transSpeed: 0.8, setPiece: 0.75, newsSentiment: 0.0, news: [] },
+    odds: {
+      bet365: { initial1X2: [3.5, 3.4, 2.0], current1X2: [3.6, 3.3, 2.05], initialAsian: { line: 0.5, home: 1.9, away: 1.9 }, currentAsian: { line: 0.5, home: 1.95, away: 1.85 } },
+      pinnacle: { initial1X2: [3.5, 3.4, 2.0], current1X2: [3.6, 3.3, 2.05], initialAsian: { line: 0.5, home: 1.9, away: 1.9 }, currentAsian: { line: 0.5, home: 1.95, away: 1.85 } },
+      macau: { initial1X2: [3.5, 3.4, 2.0], current1X2: [3.6, 3.3, 2.05], initialAsian: { line: 0.5, home: 1.9, away: 1.9 }, currentAsian: { line: 0.5, home: 1.95, away: 1.85 } }
+    },
+    retailTrends: { volume: { home: 20, draw: 25, away: 55 }, confidence: "中等", mentality: "资金持续流向客队" }
+  },
+  {
+    id: "hist-3",
+    league: "瑞典超级联赛 (瑞超)",
+    date: "2026-07-08",
+    time: "北京时间 2026-07-08 01:00",
+    venue: "利亚瓦尔体育场",
+    weather: "气温 18°C",
+    isCupMatch: false,
+    home: { name: "赫根", rank: "4", played: 10, goalsScored: 20, goalsConceded: 16, attEfficiency: 0.75, defStability: 0.6, shotConversion: 0.7, xG: 1.8, xGA: 1.5, transSpeed: 0.75, setPiece: 0.7, newsSentiment: 0.0, news: [] },
+    away: { name: "佐加顿斯", rank: "6", played: 10, goalsScored: 23, goalsConceded: 15, attEfficiency: 0.78, defStability: 0.65, shotConversion: 0.72, xG: 1.99, xGA: 1.48, transSpeed: 0.8, setPiece: 0.75, newsSentiment: 0.0, news: [] },
+    odds: {
+      bet365: { initial1X2: [2.3, 3.4, 2.8], current1X2: [2.4, 3.3, 2.7], initialAsian: { line: -0.25, home: 1.9, away: 1.9 }, currentAsian: { line: -0.25, home: 1.95, away: 1.85 } },
+      pinnacle: { initial1X2: [2.3, 3.4, 2.8], current1X2: [2.4, 3.3, 2.7], initialAsian: { line: -0.25, home: 1.9, away: 1.9 }, currentAsian: { line: -0.25, home: 1.95, away: 1.85 } },
+      macau: { initial1X2: [2.3, 3.4, 2.8], current1X2: [2.4, 3.3, 2.7], initialAsian: { line: -0.25, home: 1.9, away: 1.9 }, currentAsian: { line: -0.25, home: 1.95, away: 1.85 } }
+    },
+    retailTrends: { volume: { home: 45, draw: 25, away: 30 }, confidence: "中等", mentality: "筹码分布稳定" }
+  },
+  {
+    id: "hist-4",
+    league: "瑞典超级联赛 (瑞超)",
+    date: "2026-07-07",
+    time: "北京时间 2026-07-07 01:00",
+    venue: "奥尔扬斯·瓦尔体育场",
+    weather: "温度 19°C",
+    isCupMatch: false,
+    home: { name: "哈尔姆斯", rank: "16", played: 10, goalsScored: 9, goalsConceded: 20, attEfficiency: 0.4, defStability: 0.35, shotConversion: 0.45, xG: 1.05, xGA: 2.1, transSpeed: 0.5, setPiece: 0.55, newsSentiment: 0.0, news: [] },
+    away: { name: "哥德堡", rank: "12", played: 10, goalsScored: 11, goalsConceded: 15, attEfficiency: 0.55, defStability: 0.55, shotConversion: 0.5, xG: 1.2, xGA: 1.3, transSpeed: 0.6, setPiece: 0.6, newsSentiment: 0.0, news: [] },
+    odds: {
+      bet365: { initial1X2: [2.7, 3.1, 2.5], current1X2: [2.8, 3.1, 2.4], initialAsian: { line: 0.25, home: 1.85, away: 1.95 }, currentAsian: { line: 0.25, home: 1.9, away: 1.9 } },
+      pinnacle: { initial1X2: [2.7, 3.1, 2.5], current1X2: [2.8, 3.1, 2.4], initialAsian: { line: 0.25, home: 1.85, away: 1.95 }, currentAsian: { line: 0.25, home: 1.9, away: 1.9 } },
+      macau: { initial1X2: [2.7, 3.1, 2.5], current1X2: [2.8, 3.1, 2.4], initialAsian: { line: 0.25, home: 1.85, away: 1.95 }, currentAsian: { line: 0.25, home: 1.9, away: 1.9 } }
+    },
+    retailTrends: { volume: { home: 35, draw: 30, away: 35 }, confidence: "中等", mentality: "平局吸筹明显" }
+  },
+  {
+    id: "hist-5",
+    league: "瑞典超级联赛 (瑞超)",
+    date: "2026-07-04",
+    time: "北京时间 2026-07-04 21:00",
+    venue: "帕斯贝格体育场",
+    weather: "温度 18°C",
+    isCupMatch: false,
+    home: { name: "瓦尔贝里", rank: "15", played: 10, goalsScored: 8, goalsConceded: 18, attEfficiency: 0.45, defStability: 0.4, shotConversion: 0.45, xG: 1.1, xGA: 1.7, transSpeed: 0.5, setPiece: 0.5, newsSentiment: 0.0, news: [] },
+    away: { name: "哈尔姆斯", rank: "16", played: 10, goalsScored: 9, goalsConceded: 20, attEfficiency: 0.4, defStability: 0.35, shotConversion: 0.45, xG: 1.05, xGA: 2.1, transSpeed: 0.5, setPiece: 0.55, newsSentiment: 0.0, news: [] },
+    odds: {
+      bet365: { initial1X2: [2.4, 3.2, 2.9], current1X2: [2.35, 3.2, 3.0], initialAsian: { line: -0.25, home: 2.0, away: 1.8 }, currentAsian: { line: -0.25, home: 1.95, away: 1.85 } },
+      pinnacle: { initial1X2: [2.4, 3.2, 2.9], current1X2: [2.35, 3.2, 3.0], initialAsian: { line: -0.25, home: 2.0, away: 1.8 }, currentAsian: { line: -0.25, home: 1.95, away: 1.85 } },
+      macau: { initial1X2: [2.4, 3.2, 2.9], current1X2: [2.35, 3.2, 3.0], initialAsian: { line: -0.25, home: 2.0, away: 1.8 }, currentAsian: { line: -0.25, home: 1.95, away: 1.85 } }
+    },
+    retailTrends: { volume: { home: 40, draw: 30, away: 30 }, confidence: "中等", mentality: "主队主场低开高走" }
+  },
+  {
+    id: "hist-6",
+    league: "瑞典超级联赛 (瑞超)",
+    date: "2026-07-02",
+    time: "北京时间 2026-07-02 23:00",
+    venue: "斯威德贝克竞技场",
+    weather: "晴 20°C",
+    isCupMatch: false,
+    home: { name: "佐加顿斯", rank: "6", played: 10, goalsScored: 23, goalsConceded: 15, attEfficiency: 0.78, defStability: 0.65, shotConversion: 0.72, xG: 1.99, xGA: 1.48, transSpeed: 0.8, setPiece: 0.75, newsSentiment: 0.0, news: [] },
+    away: { name: "诺尔雪平", rank: "9", played: 10, goalsScored: 14, goalsConceded: 16, attEfficiency: 0.6, defStability: 0.55, shotConversion: 0.6, xG: 1.3, xGA: 1.5, transSpeed: 0.6, setPiece: 0.6, newsSentiment: 0.0, news: [] },
+    odds: {
+      bet365: { initial1X2: [1.6, 3.8, 5.0], current1X2: [1.55, 4.0, 5.5], initialAsian: { line: -1.0, home: 1.95, away: 1.85 }, currentAsian: { line: -1.0, home: 1.9, away: 1.9 } },
+      pinnacle: { initial1X2: [1.6, 3.8, 5.0], current1X2: [1.55, 4.0, 5.5], initialAsian: { line: -1.0, home: 1.95, away: 1.85 }, currentAsian: { line: -1.0, home: 1.9, away: 1.9 } },
+      macau: { initial1X2: [1.6, 3.8, 5.0], current1X2: [1.55, 4.0, 5.5], initialAsian: { line: -1.0, home: 1.95, away: 1.85 }, currentAsian: { line: -1.0, home: 1.9, away: 1.9 } }
+    },
+    retailTrends: { volume: { home: 70, draw: 20, away: 10 }, confidence: "高", mentality: "主队胜赔持续受压" }
+  },
+  {
+    id: "hist-7",
+    league: "美加墨世界杯 1/4决赛",
+    date: "2026-07-10",
+    time: "北京时间 2026-07-10 03:00",
+    venue: "纽约大都会体育场",
+    weather: "晴 22°C",
+    isCupMatch: true,
+    home: { name: "阿根廷", rank: "2", played: 5, goalsScored: 11, goalsConceded: 4, attEfficiency: 0.84, defStability: 0.9, shotConversion: 0.82, xG: 1.95, xGA: 1.0, transSpeed: 0.86, setPiece: 0.8, newsSentiment: 0.0, news: [] },
+    away: { name: "瑞士", rank: "15", played: 5, goalsScored: 8, goalsConceded: 6, attEfficiency: 0.7, defStability: 0.75, shotConversion: 0.7, xG: 1.4, xGA: 1.3, transSpeed: 0.7, setPiece: 0.7, newsSentiment: 0.0, news: [] },
+    odds: {
+      bet365: { initial1X2: [1.6, 3.6, 5.5], current1X2: [1.5, 3.8, 6.0], initialAsian: { line: -1.0, home: 1.9, away: 1.9 }, currentAsian: { line: -1.0, home: 1.8, away: 2.0 } },
+      pinnacle: { initial1X2: [1.6, 3.6, 5.5], current1X2: [1.5, 3.8, 6.0], initialAsian: { line: -1.0, home: 1.9, away: 1.9 }, currentAsian: { line: -1.0, home: 1.8, away: 2.0 } },
+      macau: { initial1X2: [1.6, 3.6, 5.5], current1X2: [1.5, 3.8, 6.0], initialAsian: { line: -1.0, home: 1.9, away: 1.9 }, currentAsian: { line: -1.0, home: 1.8, away: 2.0 } }
+    },
+    retailTrends: { volume: { home: 65, draw: 20, away: 15 }, confidence: "高", mentality: "卫冕冠军深得散户热烈追捧" }
+  },
+  {
+    id: "hist-8",
+    league: "美加墨世界杯 1/4决赛",
+    date: "2026-07-09",
+    time: "北京时间 2026-07-09 03:00",
+    venue: "波士顿吉列体育场",
+    weather: "温度 21°C",
+    isCupMatch: true,
+    home: { name: "英格兰", rank: "4", played: 5, goalsScored: 10, goalsConceded: 5, attEfficiency: 0.78, defStability: 0.88, shotConversion: 0.74, xG: 1.75, xGA: 1.15, transSpeed: 0.82, setPiece: 0.9, newsSentiment: 0.0, news: [] },
+    away: { name: "挪威", rank: "24", played: 5, goalsScored: 9, goalsConceded: 7, attEfficiency: 0.72, defStability: 0.72, shotConversion: 0.7, xG: 1.5, xGA: 1.4, transSpeed: 0.7, setPiece: 0.8, newsSentiment: 0.0, news: [] },
+    odds: {
+      bet365: { initial1X2: [1.8, 3.4, 4.3], current1X2: [1.75, 3.5, 4.5], initialAsian: { line: -0.75, home: 1.95, away: 1.85 }, currentAsian: { line: -0.75, home: 1.9, away: 1.9 } },
+      pinnacle: { initial1X2: [1.8, 3.4, 4.3], current1X2: [1.75, 3.5, 4.5], initialAsian: { line: -0.75, home: 1.95, away: 1.85 }, currentAsian: { line: -0.75, home: 1.9, away: 1.9 } },
+      macau: { initial1X2: [1.8, 3.4, 4.3], current1X2: [1.75, 3.5, 4.5], initialAsian: { line: -0.75, home: 1.95, away: 1.85 }, currentAsian: { line: -0.75, home: 1.9, away: 1.9 } }
+    },
+    retailTrends: { volume: { home: 60, draw: 25, away: 15 }, confidence: "中等", mentality: "三狮军团赢球格局受主流看好" }
+  },
+  {
+    id: "hist-9",
+    league: "美加墨世界杯 1/4决赛",
+    date: "2026-07-08",
+    time: "北京时间 2026-07-08 03:00",
+    venue: "亚特兰大体育场",
+    weather: "室内穹顶 21°C",
+    isCupMatch: true,
+    home: { name: "西班牙", rank: "3", played: 5, goalsScored: 12, goalsConceded: 4, attEfficiency: 0.9, defStability: 0.82, shotConversion: 0.85, xG: 2.25, xGA: 1.1, transSpeed: 0.88, setPiece: 0.78, newsSentiment: 0.0, news: [] },
+    away: { name: "比利时", rank: "11", played: 5, goalsScored: 10, goalsConceded: 6, attEfficiency: 0.78, defStability: 0.75, shotConversion: 0.75, xG: 1.6, xGA: 1.4, transSpeed: 0.75, setPiece: 0.75, newsSentiment: 0.0, news: [] },
+    odds: {
+      bet365: { initial1X2: [1.9, 3.3, 3.9], current1X2: [1.85, 3.4, 4.0], initialAsian: { line: -0.5, home: 1.85, away: 1.95 }, currentAsian: { line: -0.5, home: 1.85, away: 1.95 } },
+      pinnacle: { initial1X2: [1.9, 3.3, 3.9], current1X2: [1.85, 3.4, 4.0], initialAsian: { line: -0.5, home: 1.85, away: 1.95 }, currentAsian: { line: -0.5, home: 1.85, away: 1.95 } },
+      macau: { initial1X2: [1.9, 3.3, 3.9], current1X2: [1.85, 3.4, 4.0], initialAsian: { line: -0.5, home: 1.85, away: 1.95 }, currentAsian: { line: -0.5, home: 1.85, away: 1.95 } }
+    },
+    retailTrends: { volume: { home: 55, draw: 25, away: 20 }, confidence: "中等", mentality: "斗牛士战术底盘占优吸纳资金" }
+  },
+  {
+    id: "hist-10",
+    league: "美加墨世界杯 1/4决赛",
+    date: "2026-07-07",
+    time: "北京时间 2026-07-07 03:00",
+    venue: "达拉斯体育场",
+    weather: "空调 22°C",
+    isCupMatch: true,
+    home: { name: "法国", rank: "1", played: 5, goalsScored: 16, goalsConceded: 3, attEfficiency: 0.85, defStability: 0.95, shotConversion: 0.8, xG: 2.1, xGA: 0.8, transSpeed: 0.98, setPiece: 0.82, newsSentiment: 0.0, news: [] },
+    away: { name: "摩洛哥", rank: "14", played: 5, goalsScored: 9, goalsConceded: 5, attEfficiency: 0.72, defStability: 0.85, shotConversion: 0.7, xG: 1.5, xGA: 1.2, transSpeed: 0.75, setPiece: 0.72, newsSentiment: 0.0, news: [] },
+    odds: {
+      bet365: { initial1X2: [1.5, 3.9, 6.5], current1X2: [1.45, 4.1, 7.0], initialAsian: { line: -1.0, home: 1.85, away: 1.95 }, currentAsian: { line: -1.25, home: 1.98, away: 1.82 } },
+      pinnacle: { initial1X2: [1.5, 3.9, 6.5], current1X2: [1.45, 4.1, 7.0], initialAsian: { line: -1.0, home: 1.85, away: 1.95 }, currentAsian: { line: -1.25, home: 1.98, away: 1.82 } },
+      macau: { initial1X2: [1.5, 3.9, 6.5], current1X2: [1.45, 4.1, 7.0], initialAsian: { line: -1.0, home: 1.85, away: 1.95 }, currentAsian: { line: -1.25, home: 1.98, away: 1.82 } }
+    },
+    retailTrends: { volume: { home: 72, draw: 18, away: 10 }, confidence: "高", mentality: "高卢雄鸡实力悬殊备受追捧" }
   }
 ];
 
