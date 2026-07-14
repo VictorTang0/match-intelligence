@@ -1399,6 +1399,12 @@ body {
   margin-top: 2px;
 }
 
+.environmental-insights-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
 @media (max-width: 1100px) {
   .workspace-layout { grid-template-columns: 1fr; }
   .grid-2-columns { grid-template-columns: 1fr; }
@@ -1417,6 +1423,7 @@ body {
     gap: 10px;
   }
   .environmental-insights { grid-template-columns: 1fr; }
+  .environmental-insights-grid { grid-template-columns: 1fr; }
   .odds-tables-wrapper { grid-template-columns: 1fr; }
   .odds-table-container { overflow-x: auto; }
   .cup-advancement-split { flex-direction: column; gap: 12px; }

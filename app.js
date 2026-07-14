@@ -1134,38 +1134,47 @@ function updateActiveMatchUI() {
   
   finalWeightedConclusionEl.innerText = conclusion;
   
-  matchNewsListEl.innerHTML = "";
-  match.home.news.forEach(newsText => {
-    const li = document.createElement("li");
-    li.style.display = "flex";
-    li.style.alignItems = "center";
-    li.style.gap = "8px";
-    li.style.marginBottom = "8px";
-    li.style.fontSize = "12px";
-    li.innerHTML = `
-      <span style="font-size:10px; font-weight:700; background:rgba(0, 242, 254, 0.15); color:var(--primary-cyan); border:1px solid rgba(0, 242, 254, 0.3); padding:2px 6px; border-radius:4px; white-space:nowrap;">
-        [主队] ${match.home.name}
-      </span>
-      <span>${newsText}</span>
-    `;
-    matchNewsListEl.appendChild(li);
-  });
+  const newsListHomeEl = document.getElementById("match-news-list-home");
+  const newsListAwayEl = document.getElementById("match-news-list-away");
+  const labelHome = document.getElementById("news-label-home");
+  const labelAway = document.getElementById("news-label-away");
   
-  match.away.news.forEach(newsText => {
-    const li = document.createElement("li");
-    li.style.display = "flex";
-    li.style.alignItems = "center";
-    li.style.gap = "8px";
-    li.style.marginBottom = "8px";
-    li.style.fontSize = "12px";
-    li.innerHTML = `
-      <span style="font-size:10px; font-weight:700; background:rgba(0, 230, 118, 0.15); color:var(--primary-emerald); border:1px solid rgba(0, 230, 118, 0.3); padding:2px 6px; border-radius:4px; white-space:nowrap;">
-        [客队] ${match.away.name}
-      </span>
-      <span>${newsText}</span>
-    `;
-    matchNewsListEl.appendChild(li);
-  });
+  if (labelHome) labelHome.innerText = `${match.home.name} 情报`;
+  if (labelAway) labelAway.innerText = `${match.away.name} 情报`;
+
+  if (newsListHomeEl) {
+    newsListHomeEl.innerHTML = "";
+    match.home.news.forEach(newsText => {
+      const li = document.createElement("li");
+      li.style.display = "flex";
+      li.style.alignItems = "start";
+      li.style.gap = "6px";
+      li.style.marginBottom = "6px";
+      li.style.fontSize = "12px";
+      li.innerHTML = `
+        <span style="font-size: 8px; color: var(--primary-cyan); margin-top: 4px;">●</span>
+        <span>${newsText}</span>
+      `;
+      newsListHomeEl.appendChild(li);
+    });
+  }
+  
+  if (newsListAwayEl) {
+    newsListAwayEl.innerHTML = "";
+    match.away.news.forEach(newsText => {
+      const li = document.createElement("li");
+      li.style.display = "flex";
+      li.style.alignItems = "start";
+      li.style.gap = "6px";
+      li.style.marginBottom = "6px";
+      li.style.fontSize = "12px";
+      li.innerHTML = `
+        <span style="font-size: 8px; color: var(--primary-emerald); margin-top: 4px;">●</span>
+        <span>${newsText}</span>
+      `;
+      newsListAwayEl.appendChild(li);
+    });
+  }
   
   renderIndicatorsChart(match.home, match.away);
   
@@ -1223,8 +1232,8 @@ function updateActiveMatchUI() {
   const htftText = `${predictions.htFt[0].result} / ${predictions.htFt[1].result}`;
   htftDisplayEl.innerText = htftText;
   
-  // 杯赛
-  if (match.isCupMatch && predictions.cupAdvancement) {
+  // 杯赛 (历史预测中不显示杯赛晋级图谱)
+  if (match.isCupMatch && predictions.cupAdvancement && !isFinished) {
     cupQualifyContainerEl.classList.remove("hidden");
     
     const adv = predictions.cupAdvancement;

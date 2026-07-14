@@ -277,22 +277,32 @@
               </div>
             </div>
 
-            <!-- 气候情报卡片 -->
+            <!-- 气候与多维情报卡片 -->
             <div class="match-info-card card">
               <span class="section-tag">临场多维情报</span>
               <h3 class="card-title">天气与关键伤病情报</h3>
               
-              <!-- 天气与关键伤病情报 -->
-              <div class="environmental-insights" style="border-top: none; padding-top: 0; margin-top: 0;">
-                <div class="weather-box" style="margin-bottom: 12px;">
-                  <span class="insight-label">天气与场馆效应</span>
-                  <p id="match-weather">加载中...</p>
+              <div class="environmental-insights" style="border-top: none; padding-top: 0; margin-top: 0; display: flex; flex-direction: column; gap: 16px;">
+                <!-- 首行：天气与场馆效应 -->
+                <div class="weather-box" style="padding: 10px 14px; background: rgba(0, 0, 0, 0.15); border-radius: 6px; border: 1px solid rgba(255, 255, 255, 0.05);">
+                  <span class="insight-label" style="display: block; font-size: 11px; color: var(--text-muted); margin-bottom: 4px; text-transform: uppercase;">天气与场馆效应</span>
+                  <p id="match-weather" style="margin: 0; font-size: 13px; font-weight: 500; color: var(--text-light);">加载中...</p>
                 </div>
-                <div class="suspensions-box">
-                  <span class="insight-label">突发伤病与临场情报</span>
-                  <ul id="match-news-list" class="bullet-list">
-                    <!-- 临场情报 -->
-                  </ul>
+                
+                <!-- 两列：双方突发伤病与临场情报 -->
+                <div class="environmental-insights-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                  <div class="suspensions-box-home" style="padding: 10px 12px; background: rgba(0, 242, 254, 0.04); border-radius: 6px; border: 1px solid rgba(0, 242, 254, 0.1);">
+                    <span class="insight-label" id="news-label-home" style="display: block; font-size: 11px; color: var(--primary-cyan); margin-bottom: 8px; font-weight: 700; text-transform: uppercase; border-bottom: 1px solid rgba(0, 242, 254, 0.15); padding-bottom: 4px;">主队情报</span>
+                    <ul id="match-news-list-home" class="bullet-list" style="margin: 0; padding-left: 0; list-style: none;">
+                      <!-- 主队情报 -->
+                    </ul>
+                  </div>
+                  <div class="suspensions-box-away" style="padding: 10px 12px; background: rgba(0, 230, 118, 0.04); border-radius: 6px; border: 1px solid rgba(0, 230, 118, 0.1);">
+                    <span class="insight-label" id="news-label-away" style="display: block; font-size: 11px; color: var(--primary-emerald); margin-bottom: 8px; font-weight: 700; text-transform: uppercase; border-bottom: 1px solid rgba(0, 230, 118, 0.15); padding-bottom: 4px;">客队情报</span>
+                    <ul id="match-news-list-away" class="bullet-list" style="margin: 0; padding-left: 0; list-style: none;">
+                      <!-- 客队情报 -->
+                    </ul>
+                  </div>
                 </div>
               </div>
             </div>
