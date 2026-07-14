@@ -147,151 +147,156 @@
           </div>
         </section>
 
-        <!-- 第一栏：预测结果置顶 与 AI综合结论 并排 -->
-        <section class="dashboard-row grid-2-columns">
+        <!-- 瀑布流双列面板：动态平衡高度，防止高度不对称拉伸 -->
+        <section class="dashboard-row grid-2-columns" style="align-items: start; gap: 24px;">
           
-          <!-- 常规时间预测 + 晋级概率 (置顶的预测结果) -->
-          <div class="predictions-card card" id="current-predictions-card">
-            <span class="section-tag" style="color: var(--primary-cyan);">最新预测结果</span>
-            <h3 class="card-title" style="margin-bottom:12px;">全方位多维预测结果</h3>
+          <!-- 左侧列：最新预测结果 + 核心指标对比 -->
+          <div class="dashboard-column" style="display: flex; flex-direction: column; gap: 24px;">
             
-            <div class="predictions-metrics-grid">
+            <!-- 常规时间预测 + 晋级概率 -->
+            <div class="predictions-card card" id="current-predictions-card">
+              <span class="section-tag" style="color: var(--primary-cyan);">最新预测结果</span>
+              <h3 class="card-title" style="margin-bottom:12px;">全方位多维预测结果</h3>
               
-              <!-- 常规时间三项概率 (只考虑常规时间含补时) -->
-              <div class="prob-chart-row" id="container-prob-row">
-                <span class="insight-label" style="margin-bottom: 8px;">常规时间(90分钟含补时) 概率分布 <span class="change-badge" id="badge-prob-change"></span></span>
-                <div class="team-prob-bar-container">
-                  <div class="prob-bar-labels">
-                    <span class="prob-home-name">主胜</span>
-                    <span class="prob-draw-name">平局</span>
-                    <span class="prob-away-name">客胜</span>
-                  </div>
-                  <div class="prob-progress-bar">
-                    <div class="prob-segment home-seg" id="prob-home-w">0%</div>
-                    <div class="prob-segment draw-seg" id="prob-draw-w">0%</div>
-                    <div class="prob-segment away-seg" id="prob-away-w">0%</div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- 加时赛与点球大战概率判定 (Cup match progression block) -->
-              <div class="cup-qualify-panel hidden" id="cup-qualify-container">
-                <span class="insight-label">杯赛晋级图谱 (常规/加时/点球) <span class="change-badge" id="badge-cup-change"></span></span>
-                <div class="cup-advancement-split">
-                  <div class="cup-qualify-side home-qualify-side">
-                    <span class="qualify-team-name" id="cup-home-team">主队</span>
-                    <span class="qualify-pct font-outfit" id="cup-home-pct">50% 晋级</span>
-                    <div class="qualify-details">
-                      <div>常规胜: <span id="cup-home-reg">0%</span></div>
-                      <div>加时胜: <span id="cup-home-et">0%</span></div>
-                      <div>点球胜: <span id="cup-home-pk">0%</span></div>
+              <div class="predictions-metrics-grid">
+                
+                <!-- 常规时间三项概率 (只考虑常规时间含补时) -->
+                <div class="prob-chart-row" id="container-prob-row">
+                  <span class="insight-label" style="margin-bottom: 8px;">常规时间(90分钟含补时) 概率分布 <span class="change-badge" id="badge-prob-change"></span></span>
+                  <div class="team-prob-bar-container">
+                    <div class="prob-bar-labels">
+                      <span class="prob-home-name">主胜</span>
+                      <span class="prob-draw-name">平局</span>
+                      <span class="prob-away-name">客胜</span>
                     </div>
-                  </div>
-                  <div class="cup-qualify-divider">VS</div>
-                  <div class="cup-qualify-side away-qualify-side">
-                    <span class="qualify-team-name" id="cup-away-team">客队</span>
-                    <span class="qualify-pct font-outfit" id="cup-away-pct">50% 晋级</span>
-                    <div class="qualify-details">
-                      <div>常规胜: <span id="cup-away-reg">0%</span></div>
-                      <div>加时胜: <span id="cup-away-et">0%</span></div>
-                      <div>点球胜: <span id="cup-away-pk">0%</span></div>
+                    <div class="prob-progress-bar">
+                      <div class="prob-segment home-seg" id="prob-home-w">0%</div>
+                      <div class="prob-segment draw-seg" id="prob-draw-w">0%</div>
+                      <div class="prob-segment away-seg" id="prob-away-w">0%</div>
                     </div>
                   </div>
                 </div>
-              </div>
 
-              <!-- 大小球 & HT/FT -->
-              <div class="sub-forecasts-grid">
-                <div class="sub-forecast-item" id="container-ou-item">
-                  <span class="sub-label">大小球分界 (2.5) <span class="change-badge" id="badge-ou-change"></span></span>
-                  <div class="ou-visual">
-                    <div class="ou-segment" id="over-25-pct">大球: --%</div>
-                    <div class="ou-segment" id="under-25-pct">小球: --%</div>
+                <!-- 加时赛与点球大战概率判定 (Cup match progression block) -->
+                <div class="cup-qualify-panel hidden" id="cup-qualify-container">
+                  <span class="insight-label">杯赛晋级图谱 (常规/加时/点球) <span class="change-badge" id="badge-cup-change"></span></span>
+                  <div class="cup-advancement-split">
+                    <div class="cup-qualify-side home-qualify-side">
+                      <span class="qualify-team-name" id="cup-home-team">主队</span>
+                      <span class="qualify-pct font-outfit" id="cup-home-pct">50% 晋级</span>
+                      <div class="qualify-details">
+                        <div>常规胜: <span id="cup-home-reg">0%</span></div>
+                        <div>加时胜: <span id="cup-home-et">0%</span></div>
+                        <div>点球胜: <span id="cup-home-pk">0%</span></div>
+                      </div>
+                    </div>
+                    <div class="cup-qualify-divider">VS</div>
+                    <div class="cup-qualify-side away-qualify-side">
+                      <span class="qualify-team-name" id="cup-away-team">客队</span>
+                      <span class="qualify-pct font-outfit" id="cup-away-pct">50% 晋级</span>
+                      <div class="qualify-details">
+                        <div>常规胜: <span id="cup-away-reg">0%</span></div>
+                        <div>加时胜: <span id="cup-away-et">0%</span></div>
+                        <div>点球胜: <span id="cup-away-pk">0%</span></div>
+                      </div>
+                    </div>
                   </div>
                 </div>
-                <div class="sub-forecast-item" id="container-scores-item">
-                  <span class="sub-label">常规时间最可能比分 <span class="change-badge" id="badge-scores-change"></span></span>
-                  <ul class="scores-list" id="top-scores-list">
-                    <!-- 进球 -->
+
+                <!-- 大小球 & HT/FT -->
+                <div class="sub-forecasts-grid">
+                  <div class="sub-forecast-item" id="container-ou-item">
+                    <span class="sub-label">大小球分界 (2.5) <span class="change-badge" id="badge-ou-change"></span></span>
+                    <div class="ou-visual">
+                      <div class="ou-segment" id="over-25-pct">大球: --%</div>
+                      <div class="ou-segment" id="under-25-pct">小球: --%</div>
+                    </div>
+                  </div>
+                  <div class="sub-forecast-item" id="container-scores-item">
+                    <span class="sub-label">常规时间最可能比分 <span class="change-badge" id="badge-scores-change"></span></span>
+                    <ul class="scores-list" id="top-scores-list">
+                      <!-- 进球 -->
+                    </ul>
+                  </div>
+                  <div class="sub-forecast-item" id="container-htft-item">
+                    <span class="sub-label">最可能半全场 <span class="change-badge" id="badge-htft-change"></span></span>
+                    <div class="htft-box" id="htft-display">-- / --</div>
+                  </div>
+                </div>
+
+                <!-- 多级稳胆推荐 -->
+                <div class="multi-tier-predictions-grid">
+                  <div class="tier-item" id="container-conf-item">
+                    <span class="tier-label border-cyan">模型置信度 <span class="change-badge" id="badge-conf-change"></span></span>
+                    <span class="tier-value" id="tier-confidence">--</span>
+                  </div>
+                  <div class="tier-item" id="container-mainstream-item">
+                    <span class="tier-label border-violet">保守推荐 <span class="change-badge" id="badge-main-change"></span></span>
+                    <span class="tier-value" id="tier-mainstream">--</span>
+                  </div>
+                  <div class="tier-item" id="container-aggressive-item">
+                    <span class="tier-label border-emerald">激进推荐 <span class="change-badge" id="badge-aggr-change"></span></span>
+                    <span class="tier-value" id="tier-aggressive">--</span>
+                  </div>
+                  <div class="tier-item" id="container-underdog-item">
+                    <span class="tier-label border-gold">爆冷推荐 <span class="change-badge" id="badge-und-change"></span></span>
+                    <span class="tier-value" id="tier-underdog">--</span>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- 指标PK柱状图 -->
+            <div class="indicators-card card">
+              <span class="section-tag">核心维度对比</span>
+              <h3 class="card-title">常规时间 7 项核心评估指标 PK</h3>
+              <div class="indicators-chart-container" id="indicators-chart">
+                <!-- 指标图 -->
+              </div>
+            </div>
+
+          </div>
+
+          <!-- 右侧列：AI 综合研判结论 + 天气与关键伤病情报 -->
+          <div class="dashboard-column" style="display: flex; flex-direction: column; gap: 24px;">
+            
+            <!-- AI 综合研判结论 -->
+            <div class="conclusion-panel card" id="conclusion-panel-card">
+              <div class="conclusion-header">
+                <div class="conclusion-title-group">
+                  <span class="section-tag" style="color: var(--primary-cyan);">AI 综合研判结论 (置顶)</span>
+                  <h3>决策引擎多维度加权终极结论</h3>
+                </div>
+                <div class="conclusion-meta">
+                  <span class="data-source-badge">真实数据交叉校验</span>
+                </div>
+              </div>
+              <div class="conclusion-content" id="final-weighted-conclusion">
+                正在加载 AI 模型推理结论，请稍候...
+              </div>
+            </div>
+
+            <!-- 气候情报卡片 -->
+            <div class="match-info-card card">
+              <span class="section-tag">临场多维情报</span>
+              <h3 class="card-title">天气与关键伤病情报</h3>
+              
+              <!-- 天气与关键伤病情报 -->
+              <div class="environmental-insights" style="border-top: none; padding-top: 0; margin-top: 0;">
+                <div class="weather-box" style="margin-bottom: 12px;">
+                  <span class="insight-label">天气与场馆效应</span>
+                  <p id="match-weather">加载中...</p>
+                </div>
+                <div class="suspensions-box">
+                  <span class="insight-label">突发伤病与临场情报</span>
+                  <ul id="match-news-list" class="bullet-list">
+                    <!-- 临场情报 -->
                   </ul>
                 </div>
-                <div class="sub-forecast-item" id="container-htft-item">
-                  <span class="sub-label">最可能半全场 <span class="change-badge" id="badge-htft-change"></span></span>
-                  <div class="htft-box" id="htft-display">-- / --</div>
-                </div>
-              </div>
-
-              <!-- 多级稳胆推荐 -->
-              <div class="multi-tier-predictions-grid">
-                <div class="tier-item" id="container-conf-item">
-                  <span class="tier-label border-cyan">模型置信度 <span class="change-badge" id="badge-conf-change"></span></span>
-                  <span class="tier-value" id="tier-confidence">--</span>
-                </div>
-                <div class="tier-item" id="container-mainstream-item">
-                  <span class="tier-label border-violet">保守推荐 <span class="change-badge" id="badge-main-change"></span></span>
-                  <span class="tier-value" id="tier-mainstream">--</span>
-                </div>
-                <div class="tier-item" id="container-aggressive-item">
-                  <span class="tier-label border-emerald">激进推荐 <span class="change-badge" id="badge-aggr-change"></span></span>
-                  <span class="tier-value" id="tier-aggressive">--</span>
-                </div>
-                <div class="tier-item" id="container-underdog-item">
-                  <span class="tier-label border-gold">爆冷推荐 <span class="change-badge" id="badge-und-change"></span></span>
-                  <span class="tier-value" id="tier-underdog">--</span>
-                </div>
-              </div>
-
-            </div>
-          </div>
-
-          <!-- AI 综合研判结论 -->
-          <div class="conclusion-panel card" id="conclusion-panel-card" style="height: 100%;">
-            <div class="conclusion-header">
-              <div class="conclusion-title-group">
-                <span class="section-tag" style="color: var(--primary-cyan);">AI 综合研判结论 (置顶)</span>
-                <h3>决策引擎多维度加权终极结论</h3>
-              </div>
-              <div class="conclusion-meta">
-                <span class="data-source-badge">真实数据交叉校验</span>
               </div>
             </div>
-            <div class="conclusion-content" id="final-weighted-conclusion">
-              正在加载 AI 模型推理结论，请稍候...
-            </div>
-          </div>
 
-        </section>
-
-        <!-- 第二栏：指标PK 与 气候/情报 关联并排 -->
-        <section class="dashboard-row grid-2-columns">
-          
-          <!-- 指标PK柱状图 -->
-          <div class="indicators-card card">
-            <span class="section-tag">核心维度对比</span>
-            <h3 class="card-title">常规时间 7 项核心评估指标 PK</h3>
-            <div class="indicators-chart-container" id="indicators-chart">
-              <!-- 指标图 -->
-            </div>
-          </div>
-
-          <!-- 气候情报卡片 -->
-          <div class="match-info-card card">
-            <span class="section-tag">临场多维情报</span>
-            <h3 class="card-title">天气与关键伤病情报</h3>
-            
-            <!-- 天气与关键伤病情报 -->
-            <div class="environmental-insights" style="border-top: none; padding-top: 0; margin-top: 0;">
-              <div class="weather-box" style="margin-bottom: 12px;">
-                <span class="insight-label">天气与场馆效应</span>
-                <p id="match-weather">加载中...</p>
-              </div>
-              <div class="suspensions-box">
-                <span class="insight-label">突发伤病与临场情报</span>
-                <ul id="match-news-list" class="bullet-list">
-                  <!-- 临场情报 -->
-                </ul>
-              </div>
-            </div>
           </div>
 
         </section>

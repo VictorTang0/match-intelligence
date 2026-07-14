@@ -203,7 +203,7 @@ function applyHourlyUpdateData(match, hourNum) {
   }
 }
 
-// 本地真实赛果数据库 (国家体育彩票网官方数据备份)
+// 本地真实赛果数据库 (国家体育彩票网与365scores数据备份)
 const REAL_MATCH_RESULTS = {
   "djurgardens-halmstads": {
     fullScore: "3-0",
@@ -214,7 +214,7 @@ const REAL_MATCH_RESULTS = {
     bqc: "胜-胜",
     homeGoals: 3,
     awayGoals: 0,
-    detailText: "佐加顿斯常规时间 3-0 击败哈尔姆斯。半场 2-0。进球: Hegland 28', 45', Lien 57'。数据源: 体育彩票网官方公告。"
+    detailText: "佐加顿斯常规时间 3-0 击败哈尔姆斯。半场 2-0。进球: Hegland 28', 45', Lien 57'。数据源: www.365scores.com。"
   },
   "france-spain": {
     fullScore: "2-1",
@@ -225,7 +225,7 @@ const REAL_MATCH_RESULTS = {
     bqc: "平-胜",
     homeGoals: 2,
     awayGoals: 1,
-    detailText: "法国常规时间 2-1 击败西班牙。数据源: 体育彩票网官方公告。"
+    detailText: "法国常规时间 2-1 击败西班牙。数据源: www.365scores.com。"
   },
   "england-argentina": {
     fullScore: "1-0",
@@ -236,7 +236,7 @@ const REAL_MATCH_RESULTS = {
     bqc: "平-胜",
     homeGoals: 1,
     awayGoals: 0,
-    detailText: "英格兰常规时间 1-0 击败阿根廷。数据源: 体育彩票网官方公告。"
+    detailText: "英格兰常规时间 1-0 击败阿根廷。数据源: www.365scores.com。"
   }
 };
 
@@ -291,8 +291,6 @@ function getChinaTimeHour() {
  */
 function checkMatchesForAudit() {
   const now = Date.now();
-  const hourCST = getChinaTimeHour();
-  const isSyncWindow = hourCST >= 10 && hourCST < 23;
 
   MATCHES_DATA.forEach(match => {
     const startTime = MATCH_START_TIMES[match.id];
@@ -300,22 +298,9 @@ function checkMatchesForAudit() {
 
     const diffMs = now - startTime;
     
-    // 结束后5分钟 且 处于每日 10:00 - 23:00 窗口内
+    // 结束后5分钟即自动开启赛果数据审计与重训校验
     if (diffMs >= 125 * 60 * 1000) {
-      if (isSyncWindow) {
-        autoAuditAndTrainMatchDeterministic(match);
-      } else {
-        // 如果是完赛但非窗口期，输出等待同步提示
-        const logMsg = `检测到 ${match.home.name} VS ${match.away.name} 已完赛，但当前非数据同步窗口（当前北京时间 ${hourCST}点，同步时段为 10:00-23:00），等待至 10:00 自动开启数据审计。`;
-        const logExists = autoResultLogs.some(log => log.text.includes("当前非数据同步窗口"));
-        if (!logExists) {
-          autoResultLogs.push({
-            time: "同步挂起",
-            text: logMsg
-          });
-          renderAutoResultLogs();
-        }
-      }
+      autoAuditAndTrainMatchDeterministic(match);
     }
   });
 }
@@ -593,6 +578,16 @@ function renderMatchesList() {
     const predictions = getPredictionsForMatch(match);
     const trap = analyzeBookmakerTraps(match, predictions);
     
+    // 检查比赛是否完赛 (开赛后2小时即为完赛)
+    const now = Date.now();
+    const startTime = MATCH_START_TIMES[match.id];
+    const isFinished = startTime && (now - startTime >= 120 * 60 * 1000);
+    
+    let statusBadge = "";
+    if (isFinished) {
+      statusBadge = `<span class="match-status-ended" style="font-size: 10px; padding: 2px 6px; background: rgba(239, 83, 80, 0.15); color: #ef5350; border: 1px solid rgba(239, 83, 80, 0.2); border-radius: 4px; font-weight: 700; margin-left: auto;">已结束</span>`;
+    }
+    
     const btn = document.createElement("button");
     btn.className = `match-select-btn ${match.id === activeMatchId ? "active" : ""}`;
     btn.dataset.id = match.id;
@@ -602,10 +597,13 @@ function renderMatchesList() {
     else if (trap.trapLevel === "中等") riskClass = "medium";
     
     btn.innerHTML = `
-      <span class="match-select-league">${match.league}</span>
-      <span class="match-select-teams">${match.home.name} vs ${match.away.name}</span>
-      <div class="match-select-meta">
-        <span class="match-select-time">${match.date}</span>
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; width: 100%;">
+        <span class="match-select-league">${match.league}</span>
+        ${statusBadge}
+      </div>
+      <span class="match-select-teams" style="display: block; font-weight: 600; text-align: left; margin-bottom: 6px;">${match.home.name} vs ${match.away.name}</span>
+      <div class="match-select-meta" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+        <span class="match-select-time" style="font-size: 11px; opacity: 0.7;">${match.time.replace("北京时间 ", "")}</span>
         <span class="match-select-risk ${riskClass}">${trap.trapLevel}陷阱</span>
       </div>
     `;
@@ -878,7 +876,27 @@ function updateActiveMatchUI() {
   iterationsCountEl.innerText = `第 ${iterationsCount} 次迭代`;
   
   matchLeagueLabelEl.innerText = match.league;
-  activeMatchTitleEl.innerText = `${match.home.name} vs ${match.away.name}`;
+  
+  // 检查比赛是否完赛 (开赛后2小时即为完赛)
+  const now = Date.now();
+  const startTime = MATCH_START_TIMES[match.id];
+  const isFinished = startTime && (now - startTime >= 120 * 60 * 1000);
+  
+  if (isFinished) {
+    const fallback = REAL_MATCH_RESULTS[match.id];
+    const scoreStr = fallback ? ` ${fallback.fullScore} ` : " vs ";
+    activeMatchTitleEl.innerHTML = `
+      ${match.home.name}
+      <span style="color: var(--accent-gold); margin: 0 12px; font-family: var(--font-header); font-size: 24px; font-weight: 800; text-shadow: 0 0 10px rgba(255, 179, 0, 0.4);">${scoreStr}</span>
+      ${match.away.name}
+      <span class="badge-ended" style="display: inline-block; font-size: 11px; font-weight: bold; background: rgba(239, 83, 80, 0.15); color: #ef5350; border: 1px solid rgba(239, 83, 80, 0.3); padding: 2px 8px; border-radius: 4px; vertical-align: middle; margin-left: 10px;">
+        已结束 (数据源: www.365scores.com)
+      </span>
+    `;
+  } else {
+    activeMatchTitleEl.innerText = `${match.home.name} vs ${match.away.name}`;
+  }
+  
   matchTimeEl.innerText = `🕒 ${match.time}`;
   matchVenueEl.innerText = `📍 ${match.venue}`;
   matchWeatherEl.innerText = match.weather;
