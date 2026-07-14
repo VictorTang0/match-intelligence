@@ -577,7 +577,7 @@ async function fetchTodayRecommendedMatches() {
     url => `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(url)}`
   ];
   
-  const targetUrl = "https://webapi.sporttery.cn/gateway/jc/zq/getMatchCalculatorV1.qry?poolCode=had,hhad";
+  const targetUrl = "https://webapi.sporttery.cn/gateway/uniform/football/getMatchCalculatorV1.qry?channel=c";
   
   let remoteMatches = null;
   for (let getProxyUrl of proxies) {
@@ -592,8 +592,22 @@ async function fetchTodayRecommendedMatches() {
         const outer = JSON.parse(text);
         data = JSON.parse(outer.contents);
       }
-      if (data && data.value && data.value.matchList) {
-        remoteMatches = data.value.matchList;
+      
+      let extractedMatches = [];
+      if (data && data.value) {
+        if (data.value.matchList && data.value.matchList.length > 0) {
+          extractedMatches = data.value.matchList;
+        } else if (data.value.matchInfoList) {
+          data.value.matchInfoList.forEach(info => {
+            if (info.subMatchList) {
+              extractedMatches = extractedMatches.concat(info.subMatchList);
+            }
+          });
+        }
+      }
+      
+      if (extractedMatches.length > 0) {
+        remoteMatches = extractedMatches;
         break;
       }
     } catch (e) {
@@ -632,14 +646,18 @@ async function fetchTodayRecommendedMatches() {
         initial1X2 = [...current1X2];
       }
       if (item.hhad) {
-        const letBall = parseFloat(item.hhad.letBall || 0);
+        const letBall = parseFloat(item.hhad.goalLine || item.hhad.letBall || 0);
         currentAsian = { line: letBall, home: parseFloat(item.hhad.h || 1.9), away: parseFloat(item.hhad.a || 1.9) };
       }
       
+      const homeName = item.homeTeamAbbName || item.homeTeam || "未知主队";
+      const awayName = item.awayTeamAbbName || item.awayTeam || "未知客队";
+      const leagueName = item.leagueAbbName || item.leagueName || "其它赛事";
+      
       // 检查是否存在预定义的特色赛事 (如法国 VS 西班牙，英格兰 VS 阿根廷)
       const existingMatch = MATCHES_DATA.find(m => 
-        m.home.name.includes(item.homeTeam.substring(0, 2)) &&
-        m.away.name.includes(item.awayTeam.substring(0, 2))
+        m.home.name.includes(homeName.substring(0, 2)) &&
+        m.away.name.includes(awayName.substring(0, 2))
       );
       
       if (existingMatch) {
@@ -649,20 +667,20 @@ async function fetchTodayRecommendedMatches() {
       } else {
         const newMatch = {
           id: matchId,
-          league: item.leagueName || "其它赛事",
+          league: leagueName,
           date: dateStr,
           time: `北京时间 ${dateStr} ${timeStr.substring(0, 5)}`,
           venue: "中立场馆/未知",
           weather: "气温适宜，天气状况良好",
-          isCupMatch: item.leagueName.includes("杯") || item.leagueName.includes("半决赛") || item.leagueName.includes("决赛"),
+          isCupMatch: leagueName.includes("杯") || leagueName.includes("半决赛") || leagueName.includes("决赛") || leagueName.includes("锦标赛"),
           home: {
-            name: item.homeTeam,
+            name: homeName,
             rank: "未知", played: 5, goalsScored: 10, goalsConceded: 8,
             attEfficiency: 0.70, defStability: 0.70, shotConversion: 0.70, xG: 1.5, xGA: 1.5, transSpeed: 0.70, setPiece: 0.70, newsSentiment: 0.0,
             news: ["两队状态稳定，目前全力备战本场焦点对决。"]
           },
           away: {
-            name: item.awayTeam,
+            name: awayName,
             rank: "未知", played: 5, goalsScored: 8, goalsConceded: 10,
             attEfficiency: 0.70, defStability: 0.70, shotConversion: 0.70, xG: 1.5, xGA: 1.5, transSpeed: 0.70, setPiece: 0.70, newsSentiment: 0.0,
             news: ["客队训练状态良好，本场比赛有望排出常规主力。"]
