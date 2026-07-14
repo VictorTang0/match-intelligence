@@ -266,6 +266,7 @@ const REAL_MATCH_RESULTS = {
  */
 async function fetchSportteryResults() {
   const proxies = [
+    url => `https://corsproxy.io/?${encodeURIComponent(url)}`,
     url => `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`,
     url => `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(url)}`
   ];
@@ -277,13 +278,20 @@ async function fetchSportteryResults() {
       const response = await fetch(getProxyUrl(targetUrl));
       if (!response.ok) continue;
       const text = await response.text();
-      let data;
+      let data = null;
       try {
-        data = JSON.parse(text);
-      } catch {
-        const outer = JSON.parse(text);
-        data = JSON.parse(outer.contents);
+        const parsed = JSON.parse(text);
+        if (parsed && typeof parsed === "object") {
+          if ("contents" in parsed) {
+            data = JSON.parse(parsed.contents);
+          } else {
+            data = parsed;
+          }
+        }
+      } catch (e) {
+        console.warn("Failed to parse response text:", e);
       }
+      
       if (data && data.value && data.value.matchList) {
         return data.value.matchList;
       }
@@ -573,6 +581,7 @@ function cleanupHistoricalMatches() {
  */
 async function fetchTodayRecommendedMatches() {
   const proxies = [
+    url => `https://corsproxy.io/?${encodeURIComponent(url)}`,
     url => `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`,
     url => `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(url)}`
   ];
@@ -585,12 +594,18 @@ async function fetchTodayRecommendedMatches() {
       const response = await fetch(getProxyUrl(targetUrl));
       if (!response.ok) continue;
       const text = await response.text();
-      let data;
+      let data = null;
       try {
-        data = JSON.parse(text);
-      } catch {
-        const outer = JSON.parse(text);
-        data = JSON.parse(outer.contents);
+        const parsed = JSON.parse(text);
+        if (parsed && typeof parsed === "object") {
+          if ("contents" in parsed) {
+            data = JSON.parse(parsed.contents);
+          } else {
+            data = parsed;
+          }
+        }
+      } catch (e) {
+        console.warn("Failed to parse response text:", e);
       }
       
       let extractedMatches = [];
