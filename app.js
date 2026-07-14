@@ -719,9 +719,12 @@ async function fetchTodayRecommendedMatches() {
       const leagueName = item.leagueAbbName || item.leagueName || "其它赛事";
       
       // 检查是否存在预定义的特色赛事 (如法国 VS 西班牙，英格兰 VS 阿根廷)
-      const existingMatch = MATCHES_DATA.find(m => 
-        m.home.name.includes(homeName.substring(0, 2)) &&
-        m.away.name.includes(awayName.substring(0, 2))
+      // 只在非历史赛事中查找，且要求完整队名匹配，避免误匹配历史记录
+      const activeOnlyMatches = MATCHES_DATA.filter(m => !historicalIds.includes(m.id));
+      const existingMatch = activeOnlyMatches.find(m => 
+        (m.home.name.includes(homeName) || homeName.includes(m.home.name.substring(0, 2))) &&
+        (m.away.name.includes(awayName) || awayName.includes(m.away.name.substring(0, 2))) &&
+        m.home.name.substring(0, 2) === homeName.substring(0, 2)
       );
       
       if (existingMatch) {
